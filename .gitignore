@@ -1,3 +1,16 @@
+# Executable
+vbc
+
+# Docs
+#doc/
+
+# Tester
+
+# Vim swap files
+*.swp
+
+## AUTO-GENERATED FOR C ##
+
 # Prerequisites
 *.d
 
