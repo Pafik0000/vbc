@@ -73,6 +73,12 @@ node *swap (node *n)
 {
 //	if (1) return n;
 //
+	if (n->r->type == VAL)
+	{
+		printf (">> %s\n", "swap error");
+		printf (">> at %c %i\n", n->type, n->r->val);
+		return n;
+	}
 	node *newhead = n->r;
 	n->r = n->r->l;
 	newhead->l = n;
@@ -126,6 +132,7 @@ node *parse_expr (char *s, int parcount)
 				errorat (c);
 				return NULL;
 			}
+			tmp.afterpar = 0;
 			return new_node (&tmp);
 		case '+':
 		case '*':
