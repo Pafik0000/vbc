@@ -171,20 +171,20 @@ int eval_tree (node *n)
 	switch (n->type)
 	{
 		case ADD:
-			puts ("ADD");
+//			puts ("ADD");
 			a = eval_tree (n->l);
 			b = eval_tree (n->r);
-			printf (">> return %i + %i\n", a, b);
+//			printf (">> return %i + %i\n", a, b);
 			return a+b;//eval_tree (n->l) + eval_tree (n->r);
 		case MUL:
-			puts ("MUL");
+//			puts ("MUL");
 			a = eval_tree (n->l);
 			b = eval_tree (n->r);
-			printf (">> return %i * %i\n", a, b);
+//			printf (">> return %i * %i\n", a, b);
 			return a*b;//eval_tree (n->l) * eval_tree (n->r);
 		case VAL:
-			puts ("VAL");
-			printf (">> return %i\n", n->val);
+//			puts ("VAL");
+//			printf (">> return %i\n", n->val);
 			return n->val;
 		default:
 			printf ("%s\n", "unknown type: %i");
