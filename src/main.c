@@ -80,8 +80,12 @@ node *swap (node *n)
 		return n;
 	}
 	node *newhead = n->r;
-	n->r = n->r->l;
-	newhead->l = n;
+	n->r = newhead->l;
+
+	if (newhead->l->type == VAL)
+		newhead->l = n;
+	else
+		newhead->l = swap (n);
 
 	return newhead;
 }
