@@ -55,20 +55,51 @@ void errorat (char c)
 		printf ("error at the end of line\n");
 }
 
-/*void pn (node *n)
+int pn_recoursive_routine (
+	node *n, char *lines[1024], int lineN, int x
+)
 {
-	node *level[1024] = {0};
-	level[0] = n;
+	char nodeval =
+		n->type == VAL? '0' + n->val : n->type;
 
-	while (level[0])
+	if (n->l)
 	{
-		for (int i = 0; level[i]; i++)
-		{
+		x = pn_recoursive_routine (n->l, lines, lineN + 1, x > 0? x - 2 : x);
+	}
+	if (n->r)
+	{
+		pn_recoursive_routine (n->r, lines, lineN + 1, x + 2);
+	}
 
+	int i = 0;
+	while (i < x)
+	{
+		if (!lines[lineN][i])
+		{
+			lines[lineN][i] = ' ';
 		}
+		i++;
+	}
+	lines[lineN][i] = nodeval;
+
+	return x + 2;
+}
+
+void pn (node *n)
+{
+	char	buf[1024 * 1024] = {0};
+	char	*lines[1024];
+
+	for (int i = 0; i < 1024; i++)
+		lines[i] = buf + i * 1024;
+
+	pn_recoursive_routine (n, lines, 0, 2);
+	for (int i = 0; lines[i][0]; i++)
+	{
+		puts (lines[i]);
 	}
 }
-*/
+
 node *swap (node *n)
 {
 //	if (1) return n;
@@ -204,6 +235,7 @@ int main (int ac, char **av)
 	node *tree = parse_expr (av[1], 0);
 	if (tree)
 	{
+		pn (tree);
 		int result = eval_tree (tree);
 		printf ("%i\n", result);
 		destroy_tree (tree);
