@@ -186,11 +186,14 @@ node *parse_expr (char *s, int parcount)
 					&& tmp.type == MUL
 					&& tmp.r->type == ADD
 				) || (
-					tmp.r
+					*s != '('
+					&& tmp.r
 					&& tmp.r->afterpar
 				)
 			)
+			{
 				return swap (new_node (&tmp));
+			}
 			else
 				return new_node (&tmp);
 		default:
