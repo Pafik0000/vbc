@@ -110,6 +110,8 @@ node *swap (node *n)
 		printf (">> at %c %i\n", n->type, n->r->val);
 		return n;
 	}
+//	puts("SWAP");
+
 	node *newhead = n->r;
 	n->r = newhead->l;
 
@@ -171,6 +173,7 @@ node *parse_expr (char *s, int parcount)
 			return new_node (&tmp);
 		case '+':
 		case '*':
+//			printf ("RECURSE AT: %i %c ...\n", tmp.val, c);
 			tmp.r = parse_expr (s, parcount);
 			if (!tmp.r)
 			{
@@ -192,6 +195,7 @@ node *parse_expr (char *s, int parcount)
 				)
 			)
 			{
+//				printf ("SWAP AT: %i %c ...\n", tmp.l->val, c);
 				return swap (new_node (&tmp));
 			}
 			else
